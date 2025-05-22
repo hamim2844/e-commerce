@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist | Hemels Style</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/wishlist.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/ai-assistant.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <h1>hemels style</h1>
+                </div>
+                <nav>
+                    <ul id="menuItems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="icons">
+                    <a href="#" class="search-icon"><i class="fas fa-search"></i></a>
+                    <a href="wishlist.html" class="wishlist-icon active"><i class="fas fa-heart"></i><span class="wishlist-count">0</span></a>
+                    <a href="cart.html" class="cart-icon"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></a>
+                    <a href="login.html" class="user-icon"><i class="fas fa-user"></i></a>
+                </div>
+                <div class="menu-icon" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Wishlist Header -->
+    <section class="wishlist-header">
+        <div class="container">
+            <h1>My Wishlist</h1>
+            <p>Your collection of favorite products. Add them to cart whenever you're ready to purchase.</p>
+        </div>
+    </section>
+
+    <!-- Wishlist Content -->
+    <section class="wishlist-container">
+        <div class="wishlist-products">
+            <!-- Wishlist items will be loaded dynamically -->
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading your wishlist...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo">
+                        <h2>Hemels Style</h2>
+                    </div>
+                    <p>Your one-stop destination for all your shopping needs. Quality products, great prices, and exceptional service.</p>
+                    <div class="payment-methods">
+                        <img src="images/payment-methods.png" alt="Payment Methods">
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>My Account</h3>
+                    <ul>
+                        <li><a href="login.html">Sign In</a></li>
+                        <li><a href="cart.html">View Cart</a></li>
+                        <li><a href="wishlist.html">My Wishlist</a></li>
+                        <li><a href="#">Track My Order</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Hemels Style. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added here dynamically -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <p>Total: <span id="cart-total-price">$0.00</span></p>
+            </div>
+            <a href="checkout.html" class="btn checkout-btn">Checkout</a>
+            <a href="cart.html" class="btn view-cart-btn">View Cart</a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Notification Container -->
+    <div class="notification-container"></div>
+
+    <!-- AI Assistant Widget -->
+    <div class="ai-assistant-widget">
+        <div class="ai-assistant-button" id="ai-assistant-toggle">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="ai-assistant-container" id="ai-assistant-container">
+            <div class="ai-assistant-header">
+                <h3>Wishlist Assistant</h3>
+                <button class="ai-close-btn" id="ai-assistant-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="ai-assistant-body">
+                <div class="ai-messages" id="ai-messages">
+                    <div class="ai-message ai-incoming">
+                        <div class="ai-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="ai-message-content">
+                            <p>Hello! I can help with your wishlist. Need help comparing items, moving them to your cart, or finding similar products?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-input-container">
+                    <input type="text" id="ai-input" placeholder="Ask about your wishlist..." />
+                    <button id="ai-send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/integration.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/ai-assistant.js"></script>
+</body>
+</html> 

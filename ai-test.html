@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant Test Page | hemels style</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/ai-assistant.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #f9f9fb;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-header h1 {
+            color: #4A55A2;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .test-header p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .test-section h2 {
+            color: #4A55A2;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .test-section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .test-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .test-button {
+            background: linear-gradient(135deg, #4A55A2, #7B68EE);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+        }
+        
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(74, 85, 162, 0.3);
+        }
+        
+        .api-status {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f5f5f7;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .status-pending {
+            background-color: #f39c12;
+        }
+        
+        .status-success {
+            background-color: #2ecc71;
+        }
+        
+        .status-error {
+            background-color: #e74c3c;
+        }
+        
+        .status-text {
+            font-size: 14px;
+        }
+        
+        .test-result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f5f5f7;
+            font-family: monospace;
+            white-space: pre-wrap;
+            display: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .nav-links a {
+            margin: 0 10px;
+            color: #4A55A2;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h2><a href="index.html">hemels style</a></h2>
+                </div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-icons">
+                    <a href="wishlist.html" class="icon-link">
+                        <i class="fas fa-heart"></i>
+                        <span class="wishlist-count">0</span>
+                    </a>
+                    <a href="cart.html" class="icon-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <a href="#" class="icon-link toggle-search">
+                        <i class="fas fa-search"></i>
+                    </a>
+                    <div class="search-container">
+                        <form class="search-form">
+                            <input type="text" placeholder="Search products...">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Test Container -->
+    <div class="test-container">
+        <div class="test-header">
+            <h1>AI Assistant Test Page</h1>
+            <p>Use this page to test the DeepSeek-powered AI assistant functionality</p>
+        </div>
+        
+        <div class="test-section">
+            <h2>API Connection Test</h2>
+            <p>Click the button below to test the connection to the OpenRouter API using the DeepSeek model:</p>
+            
+            <button id="test-api" class="test-button">Test API Connection</button>
+            
+            <div class="api-status">
+                <div class="status-indicator status-pending" id="status-indicator"></div>
+                <span class="status-text" id="status-text">Not tested yet</span>
+            </div>
+            
+            <div class="test-result" id="api-result"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Quick Test Prompts</h2>
+            <p>Click on any of these buttons to automatically send a test prompt to the AI assistant:</p>
+            
+            <div class="test-buttons">
+                <button class="test-button test-prompt" data-prompt="Tell me about your shipping policy">Shipping Policy</button>
+                <button class="test-button test-prompt" data-prompt="What men's clothing do you have?">Men's Clothing</button>
+                <button class="test-button test-prompt" data-prompt="Can you recommend a summer outfit?">Summer Outfit</button>
+                <button class="test-button test-prompt" data-prompt="How do I return an item?">Returns</button>
+                <button class="test-button test-prompt" data-prompt="Take me to the women's collection">Navigation Test</button>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Manual Testing</h2>
+            <p>Use the AI assistant widget in the bottom right corner to manually test conversations with the AI.</p>
+            <p>The AI should:</p>
+            <ul>
+                <li>Respond to questions about products, shipping, returns, etc.</li>
+                <li>Remember conversation context</li>
+                <li>Suggest navigation to relevant pages</li>
+                <li>Provide helpful shopping assistance</li>
+            </ul>
+        </div>
+        
+        <div class="nav-links">
+            <a href="index.html">Back to Home</a>
+            <a href="AI_ASSISTANT_SETUP.md">Setup Instructions</a>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div class="notification-container"></div>
+
+    <!-- AI Assistant Widget -->
+    <div class="ai-assistant-widget">
+        <div class="ai-assistant-button" id="ai-assistant-toggle">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="ai-assistant-container" id="ai-assistant-container">
+            <div class="ai-assistant-header">
+                <h3>DeepSeek AI Assistant</h3>
+                <button class="ai-close-btn" id="ai-assistant-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="ai-assistant-body">
+                <div class="ai-messages" id="ai-messages">
+                    <div class="ai-message ai-incoming">
+                        <div class="ai-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="ai-message-content">
+                            <p>Hello! I'm your DeepSeek-powered shopping assistant. How can I help you today?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-input-container">
+                    <input type="text" id="ai-input" placeholder="Ask me anything..." />
+                    <button id="ai-send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/ai-assistant.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // API Test functionality
+            const testApiBtn = document.getElementById('test-api');
+            const statusIndicator = document.getElementById('status-indicator');
+            const statusText = document.getElementById('status-text');
+            const apiResult = document.getElementById('api-result');
+            
+            testApiBtn.addEventListener('click', async function() {
+                // Update status to pending
+                statusIndicator.className = 'status-indicator status-pending';
+                statusText.textContent = 'Testing connection...';
+                apiResult.style.display = 'block';
+                apiResult.textContent = 'Connecting to OpenRouter API...';
+                
+                try {
+                    // Get the API key from the ai-assistant.js file
+                    const aiAssistantScript = await fetch('js/ai-assistant.js');
+                    const scriptText = await aiAssistantScript.text();
+                    
+                    // Extract the API key using regex
+                    const apiKeyMatch = scriptText.match(/OPENROUTER_API_KEY\s*=\s*['"]([^'"]*)['"]/);
+                    const apiKey = apiKeyMatch ? apiKeyMatch[1] : null;
+                    
+                    if (!apiKey || apiKey.includes('sk-or-v1-...')) {
+                        throw new Error('API key not configured. Please add your OpenRouter API key to js/ai-assistant.js');
+                    }
+                    
+                    // Test the API with a simple request
+                    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${apiKey}`,
+                            'HTTP-Referer': window.location.origin,
+                            'X-Title': 'Hemels Style AI Test'
+                        },
+                        body: JSON.stringify({
+                            model: 'deepseek/deepseek-chat:free',
+                            messages: [
+                                { role: 'system', content: 'You are a helpful shopping assistant for hemels style.' },
+                                { role: 'user', content: 'Hello, is this test working?' }
+                            ],
+                            temperature: 0.7,
+                            max_tokens: 100
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`API request failed with status ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    // Update status to success
+                    statusIndicator.className = 'status-indicator status-success';
+                    statusText.textContent = 'Connection successful!';
+                    apiResult.textContent = 'API Response:\n\n' + JSON.stringify(data, null, 2);
+                    
+                } catch (error) {
+                    // Update status to error
+                    statusIndicator.className = 'status-indicator status-error';
+                    statusText.textContent = 'Connection failed!';
+                    apiResult.textContent = 'Error: ' + error.message;
+                    console.error('API Test Error:', error);
+                }
+            });
+            
+            // Test prompts functionality
+            const testPromptButtons = document.querySelectorAll('.test-prompt');
+            testPromptButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const prompt = this.getAttribute('data-prompt');
+                    
+                    // Get the AI input field and send button
+                    const aiInput = document.getElementById('ai-input');
+                    const aiSendBtn = document.getElementById('ai-send-btn');
+                    
+                    // Make sure the AI assistant is visible
+                    const aiContainer = document.getElementById('ai-assistant-container');
+                    if (!aiContainer.classList.contains('active')) {
+                        document.getElementById('ai-assistant-toggle').click();
+                    }
+                    
+                    // Set the input value and trigger the send button
+                    setTimeout(() => {
+                        aiInput.value = prompt;
+                        aiSendBtn.click();
+                    }, 500);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
